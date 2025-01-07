@@ -78,7 +78,7 @@
       document.addEventListener("DOMContentLoaded", function () {
       
         const productList = document.querySelector('#product-list');
-        let productData = [];
+      let productData = [];  //empty array 
 let productHTML = '';
         fetch ('products.json')
         .then(response => response.json())
@@ -99,15 +99,14 @@ let productHTML = '';
                   <button class="btn btn-primary add-to-cart" data-id="1">Add to Cart</button>
               </div>
           </div>
-      </div>
-      `
+      </div>`;
           
           // `<p> ${product.name} </p>`
         });
-
-    productList.innerHTML = productHTML;
+productList.innerHTML = productHTML;
       })
         });
+      
     </script>
   </body>
 </html>
