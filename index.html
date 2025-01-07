@@ -77,14 +77,16 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
       
-        const productList = document.querySelector('#product-list')
-let productHTML = ''
+        const productList = document.querySelector('#product-list');
+        let productData = [];
+let productHTML = '';
         fetch ('products.json')
         .then(response => response.json())
           .then(data => {
            //console.log(data)
-       data.products.forEach(product => {
-          console.log(product.name)
+            productsData = data.products;
+       data.products.forEach(product) => {
+         // console.log(product.name)
           productHTML += 
           `
            <div class="col-md-4">
