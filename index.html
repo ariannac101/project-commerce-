@@ -79,19 +79,19 @@
       
         const productList = document.querySelector('#product-list');
       let productData = [];  //empty array 
-let productHTML = '';
+      let productHTML = '';
         fetch ('products.json')
         .then(response => response.json())
-          .then(data) => {
+          .then((data) => {
            //console.log(data)
             productsData = data.products;
-       data.products.forEach(product) => {
+       data.products.forEach((product) => {
          // console.log(product.name)
           productHTML += 
           `
            <div class="col-md-4">
           <div class="card mb-4">
-              <img src="https://placehold.co/100" class="card-img-top" alt="Product 1">
+              <img ${product.image}" class="card-img-top" alt="Product 1">
               <div class="card-body">
                   <h5 class="card-title">${product.name}</h5>
                   <p class="card-text">$10.99</p>
@@ -101,11 +101,64 @@ let productHTML = '';
           </div>
       </div>`;
           
-          // `<p> ${product.name} </p>`
-        });
-productList.innerHTML = productHTML;
-      })
-        });
+    
+       })
+       productList.innerHTML = productHTML;
+       document.querySelectorAll('.add-to-cart').forEach
+       ((button) => {
+  button.addEventListener('click', addToCart);
+
+});
+     
+});
+   //setup cart array
+ const cart = [];
+      //add cart product to cart as object
+      function addToCart(event){
+        const productId = evemt.target.getAttribute('data-id');
+        const product= productsData[productId - 1];
+
+        let cartItem= {
+          id : product.id ,
+          name :product.name, 
+          price : product.price,
+        };
+
+   function renderCart(){
+        const cartList = document.getElementById('cart-list');
+        let cartItem = '';
+        cart.forEach((product) =>{
+cartItem += `<div class = "cart-item">
+  <h5>${product.name}</h5>
+  <p>${product.price}</p>
+  <button class = "btn btn-danger remove-from-cart data-id="${product.id}">
+    Remove
+    </button>
+    </div>
+        `;
+  })
+     cartList.textContent = cartItem;
+     document.querySelectorAll('.remove-from-cart').forEach((button)=> {
+button.addEventListener('click',removeFromCart);
+     });
+    }
+    //remove item from cart 
+    function removeFromCart(event){
+      const productId= event.target.getAttribute('data-id');
+      const productIndex = cart.findIndex(
+    (product) => product.id == productId,
+      );
+      cart.splice(productIndex,1);
+      renderCart();
+    }
+      });
+    
+        
+     
+
+        
+      
+      
       
     </script>
   </body>
